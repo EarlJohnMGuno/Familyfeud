@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Family Feud Game</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    </head>
+    <body>
+        <header class="bg-primary text-white text-center py-4">
+            <h1>Welcome to the Family Feud Game!</h1>
+            <nav>
+                <ul class="nav justify-content-center">
+                    <li class="nav-item"><a class="nav-link text-white" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#rules">Rules</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#leaderboard">Leaderboard</a></li>
+                </ul>
+            </nav>
+        </header>
+    
+        <main class="container my-4">
+            <section id="home">
+                <article class="mb-4">
+                    <h2>About the Game</h2>
+                    <p>Family Feud is a fun and exciting game where two families compete to answer survey questions. The goal is to guess the most popular answers based on a survey of 100 people. The family with the most points at the end of the game wins!</p>
+                </article>
+    
+                <article id="game-container" class="bg-light p-4 rounded shadow">
+                    <h2>Player Setup</h2>
+                    <form id="player-form" class="mb-4">
+                        <div class="form-group">
+                            <label for="player-a">Team A Player Name:</label>
+                            <input type="text" id="player-a" name="playerA" class="form-control" placeholder="Enter Team A Player Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="player-b">Team B Player Name:</label>
+                            <input type="text" id="player-b" name="playerB" class="form-control" placeholder="Enter Team B Player Name" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Start Game</button>
+                    </form>
+    
+                    <h2>Game Setup</h2><br><br>
+                    <h2>Team Scores</h2>
+                    <table class="score-table table table-bordered mb-4">
+                        <thead>
+                            <tr>
+                                <th>Team A</th>
+                                <th>Team B</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- Buzzer Image -->
+                    <div class="buzzer-container mb-4">
+                        <h2>Press the Buzzer!</h2>
+                        <img src="path/to/your/buzzer-image.png" alt="Buzzer" id="buzzer" style="cursor: pointer;">
+                    </div>
+
+                    <div class="team-controls mb-4"></div>
+                        <button id="pass-button" class="btn btn-warning">Pass</button>
+                        <button id="play-button" class="btn btn-info">Play</button>
+                    </div>
+
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item">Answer 1: ___________</li>
+                        <li class="list-group-item">Answer 2: ___________</li>
+                        <li class="list-group-item">Answer 3: ___________</li>
+                        <li class="list-group-item">Answer 4: ___________</li>
+                    </ul>
+    
+                    <form id="answer-form" method="POST" class="mb-4">
+                        <div class="form-group">
+                            <label for="user-answer">Your Answer:</label>
+                            <input type="text" id="user-answer" name="answer" class="form-control" placeholder="Enter your answer" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+    
+
+    
+
+    
+
+    
+                    <!-- Countdown Timer -->
+                    <div id="timer" style="display:none;">Time Left: <span id="time">10</span> seconds</div>
+                    <div id="progress-container">
+                        <div id="progress-bar"></div>
+                    </div>
+                </article>
+    
+                <article id="results" class="mt-4">
+                    <h2>Results</h2>
+                    <p>Points: <span id="points">0</span></p>
+                    <p>Submitted Answer: <span id="submitted-answer">None</span></p>
+                </article>
+            </section>
+        </main>
+    
+        <footer class="bg-dark text-white text-center py-3">
+            <h3>Game Over</h3>
+        </footer>
+    
+        <!-- Audio tag for background music or sound effects -->
+        <audio id="background-music" loop autoplay>
+            <source src="path/to/your/music.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    
+        <script>
+            let timer; // Variable to hold the timer
+            let timeLimit = 10; // Time limit in seconds
+    
+            // Start Game Event
+            document.getElementById('player-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const playerA = document.getElementById('player-a').value;
+                const playerB = document.getElementById('player-b').value;
+                alert(`Game is starting with Team A: ${playerA} and Team B: ${playerB}!`);
+                startRound(); // Start the first round after the player setup
+            });
+    
+            // Function to start a round and countdown
+            function startRound() {
+                document.getElementById('timer').style.display = 'block'; // Show the timer
+                document.getElementById('progress-container').style.display = 'block'; // Show the progress bar
+                let timeLeft = timeLimit; // Countdown duration
+                const timerDisplay = document.getElementById('time');
+                timerDisplay.textContent = timeLeft;
+    
+                const progressBar = document.getElementById('progress-bar');
+                progressBar.style.width = '100%'; // Start full
+    
+                const countdown = setInterval(function() {
+                    timeLeft--;
+                    timerDisplay.textContent = timeLeft;
+                    progressBar.style.width = (timeLeft / timeLimit) * 100 + '%'; // Update the progress bar
+    
+                    if (timeLeft <= 0) {
+                        clearInterval(countdown);
+                        document.getElementById('timer').style.display = 'none'; // Hide the timer when done
+                        document.getElementById('progress-container').style.display = 'none'; // Hide the progress bar when done
+                        alert("Time's up!"); // Alert when time is up
+                    }
+                }, 1000);
+            }
+    
+            // Answer Submission Event
+            document.getElementById('answer-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                let answer = document.getElementById('user-answer').value;
+                document.getElementById('submitted-answer').textContent = answer;
+                document.getElementById('points').textContent = Math.floor(Math.random() * 100);
+            });
+    
+            // Pass and Play Button Events
+            document.getElementById('pass-button').addEventListener('click', function() {
+                alert("You passed your turn!");
+                clearInterval(timer); // Stop the timer if they pass
+                document.getElementById('timer').style.display = 'none'; // Hide the timer
+                document.getElementById('progress-container').style.display = 'none'; // Hide the progress bar
+            });
+    
+            document.getElementById('play-button').addEventListener('click', function() {
+                alert("You chose to play!");
+                startRound(); // Restart the round and timer if they choose to play
+            });
+    
+            // Buzzer Click Event
+            document.getElementById('buzzer').addEventListener('click', function() {
+                alert("Buzzer pressed!");
+            });
+        </script>
+        <script src="game.js"></script>
+
+    </body>
+</html>

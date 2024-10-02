@@ -1,0 +1,146 @@
+body {
+    height: 100vh; /* Set fixed height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    background-color: #f8f9fa; /* Light background for contrast */
+    font-family: 'Arial', sans-serif; /* Preferred sans-serif font family */
+}
+
+#game-header {
+    background-color: #007bff; /* Primary color */
+    color: white;
+    text-align: center;
+    padding: 20px 0; /* Padding for header */
+    width: 100%;
+    position: fixed; /* Fixed header */
+    top: 0; /* Align to top */
+    left: 0;
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+#game-container {
+    background-color: #fff;
+    padding: 20px; /* Padding inside the game container */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    max-width: 600px; /* Max width for the container */
+    margin: 100px auto; /* Center with auto margin */
+    display: flex; /* Enable flexbox for controls */
+    flex-direction: column; /* Arrange children vertically */
+}
+
+.score-table {
+    width: 100%; /* Full width for the score table */
+    margin-top: 20px; /* Space above the score table */
+    border: 2px solid #007bff; /* Blue border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Box shadow for score table */
+}
+
+.team-controls {
+    display: flex; /* Enable flexbox for buttons */
+    justify-content: space-around; /* Space buttons evenly */
+    margin-top: 10px; /* Space above the controls */
+}
+
+.btn {
+    background-color: #007bff; /* Primary button color */
+    color: white; /* Text color for buttons */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Padding inside buttons */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for hover effects */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+#answer-form {
+    display: flex; /* Enable flexbox for the answer form */
+    align-items: center; /* Align items vertically centered */
+    margin-top: 10px; /* Space above the form */
+}
+
+#answer-form .form-group {
+    flex-grow: 1; /* Allow input to grow */
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Lighten background on hover */
+    color: #007bff; /* Change text color */
+}
+
+#progress-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    height: 20px;
+    margin-top: 10px;
+    display: none; /* Initially hide progress container */
+}
+
+#progress-bar {
+    height: 100%;
+    background-color: #28a745; /* Green */
+    width: 100%; /* Start full */
+    border-radius: 5px;
+}
+
+/* Countdown Timer Styles */
+#timer {
+    font-size: 24px; /* Larger font size */
+    color: #dc3545; /* Red color for visibility */
+    font-weight: bold; /* Bold text */
+}
+
+/* Results Section */
+#results {
+    background-color: #f8f9fa; /* Light background color */
+    padding: 20px; /* Padding around results */
+    border-radius: 5px; /* Rounded corners */
+    margin-top: 20px; /* Space above results */
+}
+
+/* Headings and Team Names */
+h1, h2 {
+    font-weight: 700; /* Bold headings */
+    text-transform: uppercase; /* Uppercase for emphasis */
+}
+
+/* Team Names */
+table th {
+    font-weight: bold; /* Bold font for team names */
+    text-transform: uppercase; /* Uppercase for emphasis */
+}
+
+/* Buzzer Positioning */
+.buzzer-container {
+    position: relative; /* Relative position for buzzer */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    #game-container {
+        padding: 10px; /* Less padding on smaller screens */
+        margin: 50px auto; /* Adjust margin */
+    }
+    
+    #timer {
+        font-size: 20px; /* Slightly smaller font size for mobile */
+    }
+    
+    .btn {
+        padding: 8px 15px; /* Smaller buttons */
+    }
+    
+    #answer-form {
+        flex-direction: column; /* Stack input and button on smaller screens */
+    }
+    
+    #answer-form .form-group {
+        margin-bottom: 10px; /* Space between stacked items */
+    }
+}
